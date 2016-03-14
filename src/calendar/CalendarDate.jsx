@@ -201,7 +201,15 @@ const CalendarDate = React.createClass({
         cellStyle.borderRightColor = lightenDarkenColor(pmColor, -10);
       }
     }
-
+    let renderDateLabel = () => {
+      let dateLabel;
+      if (selectionModifier) {
+        dateLabel = (<span className={this.cx({element: "DateLabel", modifiers: {selectionModifier}})}>{date.format('D')}</span>);
+      } else {
+        dateLabel = (<span className={this.cx({element: "DateLabel"})}>{date.format('D')}</span>);
+      }
+      return dateLabel;
+    };
     return (
       <td className={this.cx({element: 'Date', modifiers: bemModifiers, states: bemStates})}
         style={cellStyle}
@@ -216,7 +224,7 @@ const CalendarDate = React.createClass({
           </div>}
         {numStates === 1 &&
           <div className={this.cx({element: "FullDateStates"})} style={style} />}
-        <span className={this.cx({element: "DateLabel", modifiers: {'selectionModifier': selectionModifier}})}>{date.format('D')}</span>
+        {renderDateLabel()}
         {selectionModifier ? <CalendarSelection modifier={selectionModifier} pending={pending} /> : null}
         {highlightModifier ? <CalendarHighlight modifier={highlightModifier} /> : null}
       </td>

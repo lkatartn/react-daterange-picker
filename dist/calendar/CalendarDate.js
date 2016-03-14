@@ -166,6 +166,8 @@ var CalendarDate = _react2['default'].createClass({
   },
 
   render: function render() {
+    var _this = this;
+
     var _props3 = this.props;
     var date = _props3.date;
     var dateRangesForDate = _props3.dateRangesForDate;
@@ -233,7 +235,17 @@ var CalendarDate = _react2['default'].createClass({
         cellStyle.borderRightColor = (0, _utilsLightenDarkenColor2['default'])(pmColor, -10);
       }
     }
-
+    var renderDateLabel = function renderDateLabel() {
+      if (selectionModifier) return _react2['default'].createElement(
+        'span',
+        { className: _this.cx({ element: "DateLabel", modifiers: { selectionModifier: selectionModifier } }) },
+        date.format('D')
+      );else return _react2['default'].createElement(
+        'span',
+        { className: _this.cx({ element: "DateLabel" }) },
+        date.format('D')
+      );
+    };
     return _react2['default'].createElement(
       'td',
       { className: this.cx({ element: 'Date', modifiers: bemModifiers, states: bemStates }),
@@ -249,11 +261,7 @@ var CalendarDate = _react2['default'].createClass({
         _react2['default'].createElement(_CalendarDatePeriod2['default'], { period: 'pm', color: pmColor })
       ),
       numStates === 1 && _react2['default'].createElement('div', { className: this.cx({ element: "FullDateStates" }), style: style }),
-      _react2['default'].createElement(
-        'span',
-        { className: this.cx({ element: "DateLabel", modifiers: { 'selectionModifier': selectionModifier } }) },
-        date.format('D')
-      ),
+      renderDateLabel(),
       selectionModifier ? _react2['default'].createElement(_CalendarSelection2['default'], { modifier: selectionModifier, pending: pending }) : null,
       highlightModifier ? _react2['default'].createElement(_CalendarHighlight2['default'], { modifier: highlightModifier }) : null
     );
