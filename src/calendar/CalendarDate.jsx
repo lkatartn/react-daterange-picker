@@ -204,7 +204,7 @@ const CalendarDate = React.createClass({
     let renderDateLabel = () => {
       let dateLabel;
       if (selectionModifier) {
-        dateLabel = (<span className={this.cx({element: "DateLabel", modifiers: [selectionModifier]})}>{date.format('D')}</span>);
+        dateLabel = (<span className={this.cx({element: "DateLabel", modifiers: {[selectionModifier]: true}})}>{date.format('D')}</span>);
       } else {
         dateLabel = (<span className={this.cx({element: "DateLabel"})}>{date.format('D')}</span>);
       }

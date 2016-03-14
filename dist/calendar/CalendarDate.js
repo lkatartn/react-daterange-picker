@@ -6,6 +6,8 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -240,7 +242,7 @@ var CalendarDate = _react2['default'].createClass({
       if (selectionModifier) {
         dateLabel = _react2['default'].createElement(
           'span',
-          { className: _this.cx({ element: "DateLabel", modifiers: [selectionModifier] }) },
+          { className: _this.cx({ element: "DateLabel", modifiers: _defineProperty({}, selectionModifier, true) }) },
           date.format('D')
         );
       } else {
