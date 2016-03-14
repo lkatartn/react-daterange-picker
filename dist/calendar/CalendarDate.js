@@ -236,15 +236,21 @@ var CalendarDate = _react2['default'].createClass({
       }
     }
     var renderDateLabel = function renderDateLabel() {
-      if (selectionModifier) return _react2['default'].createElement(
-        'span',
-        { className: _this.cx({ element: "DateLabel", modifiers: { selectionModifier: selectionModifier } }) },
-        date.format('D')
-      );else return _react2['default'].createElement(
-        'span',
-        { className: _this.cx({ element: "DateLabel" }) },
-        date.format('D')
-      );
+      var dateLabel = undefined;
+      if (selectionModifier) {
+        dateLabel = _react2['default'].createElement(
+          'span',
+          { className: _this.cx({ element: "DateLabel", modifiers: [selectionModifier] }) },
+          date.format('D')
+        );
+      } else {
+        dateLabel = _react2['default'].createElement(
+          'span',
+          { className: _this.cx({ element: "DateLabel" }) },
+          date.format('D')
+        );
+      }
+      return dateLabel;
     };
     return _react2['default'].createElement(
       'td',
