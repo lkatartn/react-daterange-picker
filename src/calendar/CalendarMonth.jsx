@@ -94,7 +94,14 @@ const CalendarMonth = React.createClass({
   handleYearChange(event) {
     this.props.onYearChange(parseInt(event.target.value, 10));
   },
-
+  handleYearPrevious() {
+    let newYear = this.props.firstOfMonth.year() - 1;
+    this.props.onYearChange(newYear);
+  },
+  handleYearNext() {
+    let newYear = this.props.firstOfMonth.year() + 1;
+    this.props.onYearChange(newYear);
+  },
   renderYearChoice(year) {
     let {enabledRange} = this.props;
 
@@ -119,7 +126,9 @@ const CalendarMonth = React.createClass({
     let modifiers = {year: true};
     return (
       <span className={this.cx({element: 'MonthHeaderLabel', modifiers})}>
+        <div className={this.cx({element: 'ArrowIcon', modifiers: {"previous": true}})} onClick={this.handleYearPrevious} />
         {firstOfMonth.format('YYYY')}
+        <div className={this.cx({element: 'ArrowIcon', modifiers: {"next": true}})} onClick={this.handleYearNext} />
         {this.props.disableNavigation ? null : <select className={this.cx({element: 'MonthHeaderSelect'})} value={y} onChange={this.handleYearChange}>{choices.toJS()}</select>}
       </span>
     );

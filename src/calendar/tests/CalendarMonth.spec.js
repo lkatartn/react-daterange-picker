@@ -140,7 +140,7 @@ describe('The CalendarMonth Component', function () {
       it('which displays the name of the year', function () {
         this.useShallowRenderer();
         const span = this.container.props.children[2];
-        expect(span.props.children[0]).toBe(this.firstOfMonth.format('YYYY'));
+        expect(span.props.children[1]).toBe(this.firstOfMonth.format('YYYY'));
       });
 
       it('which does not show navigation if props.disableNavigation is true', function () {
@@ -148,12 +148,12 @@ describe('The CalendarMonth Component', function () {
           disableNavigation: true,
         });
         const span = this.container.props.children[2];
-        expect(span.props.children[1]).toBe(null);
+        expect(span.props.children[3]).toBe(null);
       });
 
       it('which shows navigation if props.disableNavigation is false', function () {
         this.useShallowRenderer();
-        const select = this.container.props.children[2].props.children[1];
+        const select = this.container.props.children[2].props.children[3];
         expect(select.type).toBe('select');
         expect(select.props.value).toBe(this.firstOfMonth.year());
         expect(select.props.className).toEqual('DateRangePicker__MonthHeaderSelect');
