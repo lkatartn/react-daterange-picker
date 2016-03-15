@@ -37,7 +37,23 @@ $ns: DateRangePicker;
       background-color: #ed5434;
     }
   }
+  &__ArrowIcon {
+    display: inline;
+    border-bottom: $arrow-size solid transparent;
+    border-top: $arrow-size solid transparent;
+    height: 0;
+    width: 0;
 
+    &--is-disabled {
+      opacity: .25;
+    }
+
+    &--previous {
+    }
+
+    &--next {
+    }
+  }
   &__PaginationArrow {
     border: 0;
     cursor: pointer;
@@ -113,28 +129,6 @@ $ns: DateRangePicker;
   &__MonthHeaderLabel {
     display: inline-block;
     position: relative;
-    &__ArrowIcon {
-      border-bottom: $arrow-size solid transparent;
-      border-top: $arrow-size solid transparent;
-      height: 0;
-      width: 0;
-
-      &--is-disabled {
-        opacity: .25;
-      }
-
-      &--previous {
-        border-left: $arrow-size solid transparent;
-        border-right: $arrow-size solid #aaa;
-        right: 30px / 2 - ($arrow-size / 2);
-      }
-
-      &--next {
-        border-left: $arrow-size solid #aaa;
-        border-right: $arrow-size solid transparent;
-        left: 30px / 2 - ($arrow-size / 2);
-      }
-    }
   }
 
   &__MonthHeaderSelect {

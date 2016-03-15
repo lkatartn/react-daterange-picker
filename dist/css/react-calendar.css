@@ -27,6 +27,14 @@
     border: 1px solid rgba(0, 0, 0, 0.25); }
     .DateRangePicker__LegendItemColor--selection {
       background-color: #ed5434; }
+  .DateRangePicker__ArrowIcon {
+    display: inline;
+    border-bottom: 8px solid transparent;
+    border-top: 8px solid transparent;
+    height: 0;
+    width: 0; }
+    .DateRangePicker__ArrowIcon--is-disabled {
+      opacity: .25; }
   .DateRangePicker__PaginationArrow {
     border: 0;
     cursor: pointer;
@@ -85,19 +93,6 @@
   .DateRangePicker__MonthHeaderLabel {
     display: inline-block;
     position: relative; }
-    .DateRangePicker__MonthHeaderLabel__ArrowIcon {
-      border-bottom: 8px solid transparent;
-      border-top: 8px solid transparent; }
-      .DateRangePicker__MonthHeaderLabel__ArrowIcon--is-disabled {
-        opacity: .25; }
-      .DateRangePicker__MonthHeaderLabel__ArrowIcon--previous {
-        border-left: 8px solid transparent;
-        border-right: 8px solid #aaa;
-        right: 11px; }
-      .DateRangePicker__MonthHeaderLabel__ArrowIcon--next {
-        border-left: 8px solid #aaa;
-        border-right: 8px solid transparent;
-        left: 11px; }
   .DateRangePicker__MonthHeaderSelect {
     background: #e4e4e4;
     border: 0;

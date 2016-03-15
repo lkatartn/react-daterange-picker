@@ -160,6 +160,17 @@ describe('The CalendarMonth Component', function () {
         expect(select.props.children.length).toBe(15);
       });
 
+      it('which calls props.onYearChange if props.disableNavigation is false and if clicked next year', function () {
+        var onYearChange = jasmine.createSpy();
+        this.useDocumentRenderer({
+          onYearChange: onYearChange,
+        });
+        var next = TestUtils.scryRenderedDOMComponentsWithClass(this.renderedComponent, 'DateRangePicker__ArrowIcon--next')[0].getDOMNode();
+        var value = +this.firstOfMonth.year() + 1;
+        TestUtils.Simulate.click(next);
+        expect(onYearChange).toHaveBeenCalledWith(value);
+      });
+
       it('which calls props.onYearChange if props.disableNavigation is false and if the selected value changes', function () {
         var onYearChange = jasmine.createSpy();
         this.useDocumentRenderer({

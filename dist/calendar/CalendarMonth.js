@@ -148,7 +148,14 @@ var CalendarMonth = _react2['default'].createClass({
   handleYearChange: function handleYearChange(event) {
     this.props.onYearChange(parseInt(event.target.value, 10));
   },
-
+  handleYearPrevious: function handleYearPrevious() {
+    var newYear = +this.props.firstOfMonth.year() - 1;
+    this.props.onYearChange(newYear);
+  },
+  handleYearNext: function handleYearNext() {
+    var newYear = +this.props.firstOfMonth.year() + 1;
+    this.props.onYearChange(newYear);
+  },
   renderYearChoice: function renderYearChoice(year) {
     var enabledRange = this.props.enabledRange;
 
@@ -177,9 +184,9 @@ var CalendarMonth = _react2['default'].createClass({
     return _react2['default'].createElement(
       'span',
       { className: this.cx({ element: 'MonthHeaderLabel', modifiers: modifiers }) },
-      _react2['default'].createElement('div', { className: this.cx({ element: 'ArrowIcon', modifiers: { "previous": true } }) }),
+      _react2['default'].createElement('div', { className: this.cx({ element: 'ArrowIcon', modifiers: { "previous": true } }), onClick: this.handleYearPrevious }),
       firstOfMonth.format('YYYY'),
-      _react2['default'].createElement('div', { className: this.cx({ element: 'ArrowIcon', modifiers: { "next": true } }) }),
+      _react2['default'].createElement('div', { className: this.cx({ element: 'ArrowIcon', modifiers: { "next": true } }), onClick: this.handleYearNext }),
       this.props.disableNavigation ? null : _react2['default'].createElement(
         'select',
         { className: this.cx({ element: 'MonthHeaderSelect' }), value: y, onChange: this.handleYearChange },

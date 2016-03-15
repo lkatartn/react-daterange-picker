@@ -95,11 +95,11 @@ const CalendarMonth = React.createClass({
     this.props.onYearChange(parseInt(event.target.value, 10));
   },
   handleYearPrevious() {
-    let newYear = this.props.firstOfMonth.year() - 1;
+    let newYear = +this.props.firstOfMonth.year() - 1;
     this.props.onYearChange(newYear);
   },
   handleYearNext() {
-    let newYear = this.props.firstOfMonth.year() + 1;
+    let newYear = +this.props.firstOfMonth.year() + 1;
     this.props.onYearChange(newYear);
   },
   renderYearChoice(year) {
