@@ -118,9 +118,8 @@ const CalendarMonth = React.createClass({
     return (
       <span className={this.cx({element: 'MonthHeaderLabel', modifiers})}>
         <div className={this.cx({element: 'ArrowIcon', modifiers: {"previous": true}})} onClick={this.handleYearPrevious} />
-        {firstOfMonth.format('YYYY')}
+        {this.props.disableNavigation ? firstOfMonth.format('YYYY') : <input type="number" className={this.cx({element: 'MonthHeaderYearInput'})} value={y} onChange={this.handleYearChange} />}
         <div className={this.cx({element: 'ArrowIcon', modifiers: {"next": true}})} onClick={this.handleYearNext} />
-        {this.props.disableNavigation ? null : <input type="number" className={this.cx({element: 'MonthHeaderYearInput'})} value={y} onChange={this.handleYearChange} />}
       </span>
     );
   },
