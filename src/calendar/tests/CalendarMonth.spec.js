@@ -153,11 +153,10 @@ describe('The CalendarMonth Component', function () {
 
       it('which shows navigation if props.disableNavigation is false', function () {
         this.useShallowRenderer();
-        const select = this.container.props.children[2].props.children[3];
-        expect(select.type).toBe('select');
-        expect(select.props.value).toBe(this.firstOfMonth.year());
-        expect(select.props.className).toEqual('DateRangePicker__MonthHeaderSelect');
-        expect(select.props.children.length).toBe(15);
+        const input = this.container.props.children[2].props.children[3];
+        expect(input.type).toBe('input');
+        expect(input.props.value).toBe(this.firstOfMonth.year());
+        expect(input.props.className).toEqual('DateRangePicker__MonthHeaderYearInput');
       });
 
       it('which calls props.onYearChange if props.disableNavigation is false and if clicked next year', function () {
@@ -176,10 +175,10 @@ describe('The CalendarMonth Component', function () {
         this.useDocumentRenderer({
           onYearChange: onYearChange,
         });
-        var select = TestUtils.scryRenderedDOMComponentsWithTag(this.renderedComponent, 'select')[1].getDOMNode();
+        var input = TestUtils.scryRenderedDOMComponentsWithTag(this.renderedComponent, 'input')[0].getDOMNode();
         var value = (this.firstOfMonth.year() + 1).toString();
-        select.value = value;
-        TestUtils.Simulate.change(select);
+        input.value = value;
+        TestUtils.Simulate.change(input);
         expect(onYearChange).toHaveBeenCalledWith(parseInt(value, 10));
       });
 
