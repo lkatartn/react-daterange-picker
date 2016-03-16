@@ -147,9 +147,7 @@ var CalendarMonth = _react2['default'].createClass({
 
   handleYearChange: function handleYearChange(event) {
     var newYear = event.target.value;
-    if (newYear.length === 4) {
-      this.props.onYearChange(parseInt(newYear, 10));
-    }
+    this.props.onYearChange(parseInt(newYear, 10));
   },
   handleYearPrevious: function handleYearPrevious() {
     var newYear = +this.props.firstOfMonth.year() - 1;
@@ -159,29 +157,10 @@ var CalendarMonth = _react2['default'].createClass({
     var newYear = +this.props.firstOfMonth.year() + 1;
     this.props.onYearChange(newYear);
   },
-  renderYearChoice: function renderYearChoice(year) {
-    var enabledRange = this.props.enabledRange;
-
-    if (year < enabledRange.start.year()) {
-      return null;
-    }
-
-    if (year > enabledRange.end.year()) {
-      return null;
-    }
-
-    return _react2['default'].createElement(
-      'option',
-      { key: year, value: year },
-      year
-    );
-  },
-
   renderHeaderYear: function renderHeaderYear() {
     var firstOfMonth = this.props.firstOfMonth;
 
     var y = firstOfMonth.year();
-    var years = _immutable2['default'].Range(y - 5, y).concat(_immutable2['default'].Range(y, y + 10));
     var modifiers = { year: true };
     return _react2['default'].createElement(
       'span',
@@ -189,7 +168,7 @@ var CalendarMonth = _react2['default'].createClass({
       _react2['default'].createElement('div', { className: this.cx({ element: 'ArrowIcon', modifiers: { "previous": true } }), onClick: this.handleYearPrevious }),
       firstOfMonth.format('YYYY'),
       _react2['default'].createElement('div', { className: this.cx({ element: 'ArrowIcon', modifiers: { "next": true } }), onClick: this.handleYearNext }),
-      this.props.disableNavigation ? null : _react2['default'].createElement('input', { type: 'number', size: '4', className: this.cx({ element: 'MonthHeaderYearInput' }), value: y, onInput: this.handleYearChange })
+      this.props.disableNavigation ? null : _react2['default'].createElement('input', { type: 'number', className: this.cx({ element: 'MonthHeaderYearInput' }), value: y, onChange: this.handleYearChange })
     );
   },
 

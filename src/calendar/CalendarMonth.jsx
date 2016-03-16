@@ -93,9 +93,7 @@ const CalendarMonth = React.createClass({
 
   handleYearChange(event) {
     let newYear = event.target.value;
-    if (newYear.length === 4) {
-      this.props.onYearChange(parseInt(newYear, 10));
-    }
+    this.props.onYearChange(parseInt(newYear, 10));
   },
   handleYearPrevious() {
     let newYear = +this.props.firstOfMonth.year() - 1;
@@ -105,33 +103,16 @@ const CalendarMonth = React.createClass({
     let newYear = +this.props.firstOfMonth.year() + 1;
     this.props.onYearChange(newYear);
   },
-  renderYearChoice(year) {
-    let {enabledRange} = this.props;
-
-    if (year < enabledRange.start.year()) {
-      return null;
-    }
-
-    if (year > enabledRange.end.year()) {
-      return null;
-    }
-
-    return (
-      <option key={year} value={year}>{year}</option>
-    );
-  },
-
   renderHeaderYear() {
     let {firstOfMonth} = this.props;
     let y = firstOfMonth.year();
-    let years = Immutable.Range(y - 5, y).concat(Immutable.Range(y, y + 10));
     let modifiers = {year: true};
     return (
       <span className={this.cx({element: 'MonthHeaderLabel', modifiers})}>
         <div className={this.cx({element: 'ArrowIcon', modifiers: {"previous": true}})} onClick={this.handleYearPrevious} />
         {firstOfMonth.format('YYYY')}
         <div className={this.cx({element: 'ArrowIcon', modifiers: {"next": true}})} onClick={this.handleYearNext} />
-        {this.props.disableNavigation ? null : <input type="number" size="4" className={this.cx({element: 'MonthHeaderYearInput'})} value={y} onInput={this.handleYearChange} />}
+        {this.props.disableNavigation ? null : <input type="number" className={this.cx({element: 'MonthHeaderYearInput'})} value={y} onChange={this.handleYearChange} />}
       </span>
     );
   },
