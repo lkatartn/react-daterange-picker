@@ -46,7 +46,7 @@
     "react-dom": ">=0.14.0"
   },
   "dependencies": {
-    "calendar": "^0.1.0",
+    "calendar": "github:lkatartn/calendar.js",
     "classnames": "^2.1.1",
     "immutable": "^3.7.2",
     "moment": "^2.10.6",
