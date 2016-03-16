@@ -92,7 +92,10 @@ const CalendarMonth = React.createClass({
   },
 
   handleYearChange(event) {
-    this.props.onYearChange(parseInt(event.target.value, 10));
+    let newYear = event.target.value;
+    if (newYear.length === 4) {
+      this.props.onYearChange(parseInt(newYear, 10));
+    }
   },
   handleYearPrevious() {
     let newYear = +this.props.firstOfMonth.year() - 1;
@@ -122,7 +125,6 @@ const CalendarMonth = React.createClass({
     let {firstOfMonth} = this.props;
     let y = firstOfMonth.year();
     let years = Immutable.Range(y - 5, y).concat(Immutable.Range(y, y + 10));
-    let choices = years.map(this.renderYearChoice);
     let modifiers = {year: true};
     return (
       <span className={this.cx({element: 'MonthHeaderLabel', modifiers})}>

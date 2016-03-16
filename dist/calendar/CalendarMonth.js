@@ -146,7 +146,10 @@ var CalendarMonth = _react2['default'].createClass({
   },
 
   handleYearChange: function handleYearChange(event) {
-    this.props.onYearChange(parseInt(event.target.value, 10));
+    var newYear = event.target.value;
+    if (newYear.length === 4) {
+      this.props.onYearChange(parseInt(newYear, 10));
+    }
   },
   handleYearPrevious: function handleYearPrevious() {
     var newYear = +this.props.firstOfMonth.year() - 1;
@@ -179,7 +182,6 @@ var CalendarMonth = _react2['default'].createClass({
 
     var y = firstOfMonth.year();
     var years = _immutable2['default'].Range(y - 5, y).concat(_immutable2['default'].Range(y, y + 10));
-    var choices = years.map(this.renderYearChoice);
     var modifiers = { year: true };
     return _react2['default'].createElement(
       'span',
