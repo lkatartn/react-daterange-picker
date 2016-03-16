@@ -189,7 +189,7 @@ var CalendarMonth = _react2['default'].createClass({
       _react2['default'].createElement('div', { className: this.cx({ element: 'ArrowIcon', modifiers: { "previous": true } }), onClick: this.handleYearPrevious }),
       firstOfMonth.format('YYYY'),
       _react2['default'].createElement('div', { className: this.cx({ element: 'ArrowIcon', modifiers: { "next": true } }), onClick: this.handleYearNext }),
-      this.props.disableNavigation ? null : _react2['default'].createElement('input', { type: 'number', size: '4', className: this.cx({ element: 'MonthHeaderYearInput' }), value: y, onChange: this.handleYearChange })
+      this.props.disableNavigation ? null : _react2['default'].createElement('input', { type: 'number', size: '4', className: this.cx({ element: 'MonthHeaderYearInput' }), value: y, onInput: this.handleYearChange })
     );
   },
 
