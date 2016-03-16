@@ -32,6 +32,10 @@ const CalendarMonth = React.createClass({
     value: CustomPropTypes.momentOrMomentRange,
   },
 
+  getInitialState(){
+    return {};
+  },
+
   renderDay(date, i) {
     let {dateComponent: CalendarDate, value, highlightedDate, highlightedRange, hideSelection, enabledRange, ...props} = this.props;
     let d = moment(date);
@@ -93,7 +97,11 @@ const CalendarMonth = React.createClass({
 
   handleYearChange(event) {
     let newYear = event.target.value;
-    this.props.onYearChange(parseInt(newYear, 10));
+    if (newYear.length === 4) {
+      this.props.onYearChange(parseInt(newYear, 10));
+    } else {
+      this.setState({yearInput: newYear});
+    }
   },
   handleYearPrevious() {
     let newYear = +this.props.firstOfMonth.year() - 1;
@@ -105,7 +113,7 @@ const CalendarMonth = React.createClass({
   },
   renderHeaderYear() {
     let {firstOfMonth} = this.props;
-    let y = firstOfMonth.year();
+    let y = this.state.yearInput || firstOfMonth.year();
     let modifiers = {year: true};
     return (
       <span className={this.cx({element: 'MonthHeaderLabel', modifiers})}>

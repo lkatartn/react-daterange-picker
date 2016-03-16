@@ -68,6 +68,10 @@ var CalendarMonth = _react2['default'].createClass({
     value: _utilsCustomPropTypes2['default'].momentOrMomentRange
   },
 
+  getInitialState: function getInitialState() {
+    return {};
+  },
+
   renderDay: function renderDay(date, i) {
     var _props = this.props;
     var CalendarDate = _props.dateComponent;
@@ -147,7 +151,11 @@ var CalendarMonth = _react2['default'].createClass({
 
   handleYearChange: function handleYearChange(event) {
     var newYear = event.target.value;
-    this.props.onYearChange(parseInt(newYear, 10));
+    if (newYear.length === 4) {
+      this.props.onYearChange(parseInt(newYear, 10));
+    } else {
+      this.setState({ yearInput: newYear });
+    }
   },
   handleYearPrevious: function handleYearPrevious() {
     var newYear = +this.props.firstOfMonth.year() - 1;
@@ -160,7 +168,7 @@ var CalendarMonth = _react2['default'].createClass({
   renderHeaderYear: function renderHeaderYear() {
     var firstOfMonth = this.props.firstOfMonth;
 
-    var y = firstOfMonth.year();
+    var y = this.state.yearInput || firstOfMonth.year();
     var modifiers = { year: true };
     return _react2['default'].createElement(
       'span',
