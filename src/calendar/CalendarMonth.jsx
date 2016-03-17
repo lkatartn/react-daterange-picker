@@ -113,7 +113,12 @@ const CalendarMonth = React.createClass({
   },
   renderHeaderYear() {
     let {firstOfMonth} = this.props;
-    let y = this.state.yearInput || firstOfMonth.year();
+    let y;
+    if (!this.state.yearInput && (this.state.yearInput !== '')) {
+      y = firstOfMonth.year();
+    } else {
+      y = this.state.yearInput;
+    }
     let modifiers = {year: true};
     return (
       <span className={this.cx({element: 'MonthHeaderLabel', modifiers})}>
@@ -128,33 +133,34 @@ const CalendarMonth = React.createClass({
     this.props.onMonthChange(parseInt(event.target.value, 10));
   },
 
-  renderMonthChoice(month, i) {
-    let {firstOfMonth, enabledRange} = this.props;
-    let disabled = false;
-    let year = firstOfMonth.year();
-
-    if (moment({years: year, months: i + 1, date: 1}).unix() < enabledRange.start.unix()) {
-      disabled = true;
+  handleMonthNext() {
+    var monthNumber = +this.props.firstOfMonth.month();
+    if (monthNumber === 11) {
+      this.props.onMonthChange(0);
+    } else {
+      this.props.onMonthChange(monthNumber + 1);
     }
+  },
 
-    if (moment({years: year, months: i, date: 1}).unix() > enabledRange.end.unix()) {
-      disabled = true;
+  handleMonthPrevious() {
+    var monthNumber = +this.props.firstOfMonth.month();
+    if (monthNumber === 0) {
+      this.props.onMonthChange(11);
+    } else {
+      this.props.onMonthChange(monthNumber - 1);
     }
-
-    return (
-      <option key={month} value={i} disabled={disabled ? 'disabled' : null}>{month}</option>
-    );
   },
 
   renderHeaderMonth() {
     let {firstOfMonth} = this.props;
-    let choices = MONTHS.map(this.renderMonthChoice);
+    // let choices = MONTHS.map(this.renderMonthChoice);
     let modifiers = {month: true};
 
     return (
       <span className={this.cx({element: 'MonthHeaderLabel', modifiers})}>
+        <div className={this.cx({element: 'ArrowIcon', modifiers: {"previous": true}})} onClick={this.handleMonthPrevious} />
         {firstOfMonth.format('MMMM')}
-        {this.props.disableNavigation ? null : <select className={this.cx({element: 'MonthHeaderSelect'})} value={firstOfMonth.month()} onChange={this.handleMonthChange}>{choices.toJS()}</select>}
+        <div className={this.cx({element: 'ArrowIcon', modifiers: {"next": true}})} onClick={this.handleMonthNext} />
       </span>
     );
   },

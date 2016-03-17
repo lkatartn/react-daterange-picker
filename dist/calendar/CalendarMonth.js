@@ -168,7 +168,12 @@ var CalendarMonth = _react2['default'].createClass({
   renderHeaderYear: function renderHeaderYear() {
     var firstOfMonth = this.props.firstOfMonth;
 
-    var y = this.state.yearInput || firstOfMonth.year();
+    var y = undefined;
+    if (!this.state.yearInput && this.state.yearInput !== '') {
+      y = firstOfMonth.year();
+    } else {
+      y = this.state.yearInput;
+    }
     var modifiers = { year: true };
     return _react2['default'].createElement(
       'span',
@@ -183,44 +188,36 @@ var CalendarMonth = _react2['default'].createClass({
     this.props.onMonthChange(parseInt(event.target.value, 10));
   },
 
-  renderMonthChoice: function renderMonthChoice(month, i) {
-    var _props2 = this.props;
-    var firstOfMonth = _props2.firstOfMonth;
-    var enabledRange = _props2.enabledRange;
-
-    var disabled = false;
-    var year = firstOfMonth.year();
-
-    if ((0, _moment2['default'])({ years: year, months: i + 1, date: 1 }).unix() < enabledRange.start.unix()) {
-      disabled = true;
+  handleMonthNext: function handleMonthNext() {
+    var monthNumber = +this.props.firstOfMonth.month();
+    if (monthNumber === 11) {
+      this.props.onMonthChange(0);
+    } else {
+      this.props.onMonthChange(monthNumber + 1);
     }
+  },
 
-    if ((0, _moment2['default'])({ years: year, months: i, date: 1 }).unix() > enabledRange.end.unix()) {
-      disabled = true;
+  handleMonthPrevious: function handleMonthPrevious() {
+    var monthNumber = +this.props.firstOfMonth.month();
+    if (monthNumber === 0) {
+      this.props.onMonthChange(11);
+    } else {
+      this.props.onMonthChange(monthNumber - 1);
     }
-
-    return _react2['default'].createElement(
-      'option',
-      { key: month, value: i, disabled: disabled ? 'disabled' : null },
-      month
-    );
   },
 
   renderHeaderMonth: function renderHeaderMonth() {
     var firstOfMonth = this.props.firstOfMonth;
 
-    var choices = MONTHS.map(this.renderMonthChoice);
+    // let choices = MONTHS.map(this.renderMonthChoice);
     var modifiers = { month: true };
 
     return _react2['default'].createElement(
       'span',
       { className: this.cx({ element: 'MonthHeaderLabel', modifiers: modifiers }) },
+      _react2['default'].createElement('div', { className: this.cx({ element: 'ArrowIcon', modifiers: { "previous": true } }), onClick: this.handleMonthPrevious }),
       firstOfMonth.format('MMMM'),
-      this.props.disableNavigation ? null : _react2['default'].createElement(
-        'select',
-        { className: this.cx({ element: 'MonthHeaderSelect' }), value: firstOfMonth.month(), onChange: this.handleMonthChange },
-        choices.toJS()
-      )
+      _react2['default'].createElement('div', { className: this.cx({ element: 'ArrowIcon', modifiers: { "next": true } }), onClick: this.handleMonthNext })
     );
   },
 
@@ -235,9 +232,9 @@ var CalendarMonth = _react2['default'].createClass({
   },
 
   render: function render() {
-    var _props3 = this.props;
-    var firstOfWeek = _props3.firstOfWeek;
-    var firstOfMonth = _props3.firstOfMonth;
+    var _props2 = this.props;
+    var firstOfWeek = _props2.firstOfWeek;
+    var firstOfMonth = _props2.firstOfMonth;
 
     var cal = new _calendar2['default'].Calendar(firstOfWeek);
     var monthDates = _immutable2['default'].fromJS(cal.monthDates(firstOfMonth.year(), firstOfMonth.month()));
