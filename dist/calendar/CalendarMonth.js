@@ -192,6 +192,7 @@ var CalendarMonth = _react2['default'].createClass({
     var monthNumber = +this.props.firstOfMonth.month();
     if (monthNumber === 11) {
       this.props.onMonthChange(0);
+      this.props.onYearChange(+this.props.firstOfMonth.year() + 1);
     } else {
       this.props.onMonthChange(monthNumber + 1);
     }
@@ -201,6 +202,7 @@ var CalendarMonth = _react2['default'].createClass({
     var monthNumber = +this.props.firstOfMonth.month();
     if (monthNumber === 0) {
       this.props.onMonthChange(11);
+      this.props.onYearChange(+this.props.firstOfMonth.year() - 1);
     } else {
       this.props.onMonthChange(monthNumber - 1);
     }
