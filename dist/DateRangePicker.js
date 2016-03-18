@@ -470,16 +470,21 @@ var DateRangePicker = _react2['default'].createClass({
     if ((0, _moment2['default'])({ years: year, months: month + 1, date: 1 }).unix() > enabledRange.end.unix()) {
       month = enabledRange.end.month();
     }
-
-    this.setState({
-      year: year,
-      month: month
-    });
+    if (this.state.month !== month) {
+      this.setState({
+        year: year,
+        month: month
+      });
+    } else {
+      this.setState({
+        year: year
+      });
+    }
   },
 
-  changeMonth: function changeMonth(date) {
+  changeMonth: function changeMonth(month) {
     this.setState({
-      month: date
+      month: month
     });
   },
 
